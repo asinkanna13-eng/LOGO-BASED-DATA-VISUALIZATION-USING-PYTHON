@@ -1,0 +1,151 @@
+.workspace {
+	max-width: 1220px;
+	margin: 0 auto;
+	padding: 65px 5vw;
+}
+
+.workspace-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 330px;
+	gap: 16px;
+	margin-top: 50px;
+}
+
+.input-panel,
+.method-panel,
+.result-panel {
+	border: 1px solid var(--line);
+	background: var(--panel);
+	padding: 30px;
+}
+
+.field-row {
+	display: grid;
+	grid-template-columns: 1fr 1.4fr;
+	gap: 16px;
+}
+
+.input-panel label + label {
+	margin-top: 24px;
+}
+
+.input-panel .button {
+	width: 100%;
+}
+
+.method-panel {
+	background: #10151d;
+}
+
+.method-panel ol {
+	list-style: none;
+	padding: 0;
+	margin: 35px 0;
+}
+
+.method-panel li {
+	border-top: 1px solid var(--line);
+	padding: 18px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.method-panel li:last-child {
+	border-bottom: 1px solid var(--line);
+}
+
+.method-panel li b {
+	font: 14px var(--mono);
+	color: var(--yellow);
+}
+
+.method-panel li span,
+.method-note {
+	color: var(--muted);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.method-note {
+	border-left: 2px solid var(--mint);
+	padding-left: 13px;
+}
+
+.result-panel {
+	margin-top: 16px;
+}
+
+.result-heading {
+	display: flex;
+	justify-content: space-between;
+	gap: 18px;
+	align-items: center;
+}
+
+.result-heading h2 {
+	font: 28px var(--serif);
+	margin: 10px 0 0;
+}
+
+.identity-image {
+	display: block;
+	width: 100%;
+	margin-top: 28px;
+	border: 1px solid var(--line);
+}
+
+.metric-strip {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 12px;
+	margin-top: 14px;
+}
+
+.metric-strip div {
+	padding: 15px 0;
+}
+
+.metric-strip span {
+	display: block;
+	color: var(--muted);
+	font: 11px var(--mono);
+	margin-bottom: 8px;
+}
+
+.metric-strip strong {
+	font: 20px var(--mono);
+	font-weight: 400;
+}
+
+@media (max-width: 750px) {
+	.workspace {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.workspace-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.field-row {
+		grid-template-columns: 1fr;
+	}
+
+	.metric-strip {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.result-heading {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.topbar {
+		padding: 0 20px;
+	}
+
+	.brand span:last-child {
+		display: none;
+	}
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ title }} | Math Identity Engine</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/company.css') }}">
+</head>
+<body>
+	<header class="topbar">
+		<a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">∑</span><span>Math Identity Engine</span></a>
+		<div class="topbar-right"><a class="text-link" href="{{ url_for('dashboard') }}">All modules</a><a class="text-link" href="{{ url_for('logout') }}">Sign out</a></div>
+	</header>
+	<main class="workspace">
+		<div class="page-heading">
+			<div><span class="eyebrow">MATH IDENTITY / {{ category|upper }}</span><h1>{{ title }} identity.</h1><p>Enter the details used by the {{ title }} visualization.</p></div>
+		</div>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% for category_name, message in messages %}<div class="alert {{ category_name }}">{{ message }}</div>{% endfor %}
+		{% endwith %}
+		<div class="workspace-grid">
+			<section class="input-panel">
+				<form method="post" action="{{ url_for('generate_category', category=category) }}">
+					<div class="field-row">
+						<label>{{ identifier_label }}<input name="{{ identifier_field }}" required maxlength="{{ 12 if category == 'company' else 40 }}" autocomplete="off" {% if category == 'company' %}placeholder="AAPL"{% endif %}></label>
+						<label>{{ name_label }}<input name="{{ name_field }}" required maxlength="80" autocomplete="off" {% if category == 'company' %}placeholder="APPLE"{% endif %}></label>
+					</div>
+					<label>{{ "Fancy brand text style" if category == "company" else "Brand text style" }}
+						<select name="style">{% for style in styles %}<option value="{{ style }}">{{ style }}</option>{% endfor %}</select>
+					</label>
+					{% if category == 'school' %}
+						<label>Board type<select name="board_type">{% for board in boards %}<option value="{{ board }}">{{ board }}</option>{% endfor %}</select></label>
+					{% endif %}
+					<button class="button primary" type="submit">Generate math identity <span>↗</span></button>
+				</form>
+			</section>
+			<aside class="method-panel">
+				<span class="eyebrow">{{ title|upper }} ENGINE</span>
+				<p class="method-note">The existing {{ title }} visualization program calculates and renders the identity from the details entered here.</p>
+			</aside>
+		</div>
+		{% if image_url %}
+			<section class="result-panel">
+				<div class="result-heading"><div><span class="eyebrow">GENERATED OUTPUT</span><h2>{{ title }} math identity</h2></div><a class="button secondary" href="{{ image_url }}" download>Download image</a></div>
+				<img class="identity-image" src="{{ image_url }}" alt="Generated {{ title }} mathematical identity">
+			</section>
+		{% endif %}
+	</main>
+</body>
+</html>
